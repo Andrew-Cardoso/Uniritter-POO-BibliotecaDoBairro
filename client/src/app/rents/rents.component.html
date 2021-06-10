@@ -1,0 +1,13 @@
+<p class="card-text">Aluguéis</p>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let rent of rents">
+		<!-- <p class="card-text"> -->
+			{{rent.rentedBy}}
+		<!-- </p> -->
+		<p class="card-text">
+			<small class="text-muted">
+				{{rent.dateRented | timeAgo}}
+			</small>
+		</p>
+	</li>
+  </ul>

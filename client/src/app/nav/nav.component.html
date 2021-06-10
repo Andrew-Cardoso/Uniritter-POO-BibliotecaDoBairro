@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<div class="container-fluid">
+		<a class="navbar-brand" routerLink="/home">Biblioteca do Bairro</a>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav me-auto">
+				<li class="nav-item">
+					<a class="nav-link" routerLinkActive="active" routerLink="/home">
+						<svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+							<path d="M2.5 0a.5.5 0 0 1 .5.5V2h10V.5a.5.5 0 0 1 1 0v15a.5.5 0 0 1-1 0V15H3v.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zM3 14h10v-3H3v3zm0-4h10V7H3v3zm0-4h10V3H3v3z"/>
+						</svg>
+						lista
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLinkActive="active" routerLink="/home/donate">
+						<i class="fas fa-book-medical"></i>
+						doar
+					</a>
+				</li>
+				<li class="nav-item" *hasRole="roles">
+					<a class="nav-link" routerLinkActive="active" routerLink="/home/users">
+						<i class="fas fa-user-lock"></i>
+						usuários pendentes
+					</a>
+				</li>
+				<li class="nav-item dropdown">
+					<div class="btn-group" dropdown>
+						<a dropdownToggle role="button" class="nav-link dropdown-toggle" aria-controls="dropdown-user">
+							<i class="fas fa-user{{isManager ? '-tie' : ''}}"></i>
+							{{name}} 
+							<span class="caret"></span>
+						</a>
+						<ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-user">
+							<li role="menuitem">
+								<button class="dropdown-item" role="button" (click)="loggout()">
+									<i class="fas fa-sign-out-alt"></i>
+									Sair
+								</button>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

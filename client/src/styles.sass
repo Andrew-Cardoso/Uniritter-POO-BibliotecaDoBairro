@@ -1,0 +1,57 @@
+
+:root
+	font-size: 16px
+
+*
+	margin: 0
+	padding: 0
+	box-sizing: border-box
+
+html, body, #container
+	height: 100vh
+	width: 100vw
+
+body, input, button, textarea
+	color: white
+	font: 500 1rem
+	font-family: Roboto, Helvetica, Arial, Helvetica, sans-serif
+
+body
+	background: #000
+	background-image: url('./assets/textures/type.png')
+
+#container
+	display: flex
+	align-items: center
+	justify-content: center
+	overflow: hidden
+
+.bg-primary
+	background-color: #151515 !important
+
+.btn-transparent
+	color: #CCC
+
+.toast-container .ngx-toastr
+	box-shadow: none
+
+.la-square-jelly-box
+	filter: drop-shadow(0px 0px 1px #000)
+
+h2, h3, h4
+	color: #fff
+
+.modal-footer
+	display: flex
+	align-items: center
+	justify-content: flex-end
+	height: 4rem
+
+.confirm-modal-section
+	color: #1f1f1f
+	p:last-child
+		margin-bottom: 0
+	strong
+		font-weight: 600
+.modal.fade-anim.in
+	backdrop-filter: blur(3px)

@@ -1,0 +1,28 @@
+<div class="modal-content bg-light">
+	<div class="modal-header bg-danger">
+		<h5 class="modal-title">{{title || 'Confirmar'}}</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()">
+			<span aria-hidden="true"></span>
+		</button>
+	</div>
+	<div class="modal-body">		
+		<ng-container *ngIf="!faIcon; else iconTemplate" [ngTemplateOutlet]="messageTemplate"></ng-container>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-dark" (click)="close()">Voltar</button>
+		<button type="button" class="btn btn-sm btn-danger" (click)="confirm()">{{btnConfirmText || 'Sim'}}</button>
+	</div>
+</div>
+
+<ng-template #iconTemplate>
+	<article>
+		<section>
+			<i [class]="faIcon" [style.color]="iconColor"></i>
+		</section>
+		<ng-container [ngTemplateOutlet]="messageTemplate"></ng-container>
+	</article>
+</ng-template>
+
+<ng-template #messageTemplate>
+	<section class="confirm-modal-section" [innerHTML]="message || 'Tem certeza que deseja fazer isso?'"></section>
+</ng-template>

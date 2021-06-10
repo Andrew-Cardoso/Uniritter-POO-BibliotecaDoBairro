@@ -1,0 +1,33 @@
+<div class="modal-content bg-light">
+	<div class="modal-header">
+		<h5 class="modal-title">{{book.title}}</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()">
+			<span aria-hidden="true"></span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<table class="table table-sm table-light table-borderless">
+			<thead>
+				<tr>
+					<th scope="col">Alugado por</th>
+					<th scope="col">Quando</th>
+					<th scope="col" class="text-center" *hasRole="authorizedRoles">Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let rent of book.rents">
+					<td>{{rent.rentedBy}}</td>
+					<td>{{rent.dateRented | timeAgo}}</td>
+					<td *hasRole="authorizedRoles" class="text-center">
+						<button class="btn btn-sm btn-delete" tooltip="Excluir livro alugado" (click)="deleteBook(rent)">
+							<i class="fas fa-book-dead"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-dark btn-sm" (click)="close()">Voltar</button>
+	</div>
+</div>

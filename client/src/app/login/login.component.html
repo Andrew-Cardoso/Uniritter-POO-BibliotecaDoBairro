@@ -1,0 +1,30 @@
+<form #form="ngForm" (ngSubmit)="login()" autocomplete="off">
+	<div class="form-group mt-3">
+		<fieldset>
+			<label for="username">Email</label>
+			<input 
+				type="email" 
+				name="username" 
+				id="username" 
+				class="form-control mb-2" 
+				[(ngModel)]="username"
+			>
+		</fieldset>
+	</div>
+	<div class="form-group mt-3">
+		<fieldset>
+			<label for="password">Senha</label>
+			<input 
+				type="password" 
+				name="password" 
+				id="password" 
+				class="form-control mb-2" 
+				[(ngModel)]="password"
+			>
+		</fieldset>
+	</div>
+	<div class="form-group mt-3 btn-group">
+		<button class="btn btn-success" type="submit" [disabled]="!password && !username">Entrar</button>
+		<button class="btn btn-transparent" type="button" (click)="signIn.emit()">Criar uma conta</button>
+	</div>
+</form>

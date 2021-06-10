@@ -1,0 +1,86 @@
+<form [formGroup]="registerForm" (ngSubmit)="submit()" autocomplete="off">	
+	<div class="form-group mt-3">
+		<fieldset>
+			<label for="knownAs">Nome</label>
+			<input
+				type="text" 
+				name="knownAs" 
+				id="knownAs" 
+				class="form-control mb-2" 
+				formControlName="knownAs"
+				[class.is-invalid]="registerForm.get('knownAs').errors && registerForm.get('knownAs').touched"
+			>
+			<div class="invalid-feedback">Por favor, digite seu nome.</div>
+		</fieldset>
+	</div>
+	
+	<div class="form-group mt-3">
+		<fieldset>
+			<label for="dateOfBirth">Data de nascimento</label>
+			<input 
+				type="text" 
+				name="dateOfBirth" 
+				id="dateOfBirth"
+				bsDatepicker
+				class="form-control mb-2" 
+				formControlName="dateOfBirth"
+				[maxDate]="maxDate"
+				[bsConfig]="bsConfig"
+				[class.is-invalid]="registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched"
+			>
+			<div class="invalid-feedback">Por favor, digite sua data de nascimento.</div>
+		</fieldset>
+	</div>
+
+	<div class="form-group mt-3">
+		<fieldset>
+			<label for="username">Email</label>
+			<input 
+				type="email" 
+				name="username" 
+				id="username" 
+				class="form-control mb-2" 
+				formControlName="username"
+				[class.is-invalid]="registerForm.get('username').errors && registerForm.get('username').touched"
+			>
+			<div class="invalid-feedback" *ngIf="registerForm.get('username').hasError('alreadyTaken'); else invalidEmail">Email já cadastrado.</div>
+			<ng-template #invalidEmail>
+				<div class="invalid-feedback">Email inválido.</div>
+			</ng-template>
+		</fieldset>
+	</div>
+
+	<div class="form-group mt-3">
+		<fieldset>
+			<label for="password">Senha</label>
+			<input 
+				type="password" 
+				name="password" 
+				id="password" 
+				class="form-control mb-2" 
+				formControlName="password"
+				[class.is-invalid]="registerForm.get('password').errors && registerForm.get('password').touched"
+			>
+			<div class="invalid-feedback">Por favor, digite uma senha.</div>
+		</fieldset>
+	</div>
+
+	<div class="form-group mt-3">
+		<fieldset>
+			<label for="confirmPassword">Confirme sua senha</label>
+			<input 
+				type="password" 
+				name="confirmPassword" 
+				id="confirmPassword" 
+				class="form-control mb-2" 
+				formControlName="confirmPassword"
+				[class.is-invalid]="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched"
+			>
+			<div class="invalid-feedback">A senha não coincide.</div>
+		</fieldset>
+	</div>
+	<div class="form-group mt-3 btn-group">
+		<button class="btn btn-success" type="submit" [disabled]="registerForm.invalid">Registrar</button>
+		<button class="btn btn-transparent" type="button" (click)="signUp.emit()">Já tenho uma conta</button>
+	</div>
+</form>

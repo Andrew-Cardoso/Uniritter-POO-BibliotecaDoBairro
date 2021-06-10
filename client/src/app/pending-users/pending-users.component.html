@@ -1,0 +1,41 @@
+<table class="table table-light table-hover table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Nome</th>
+			<th scope="col">Data de nascimento</th>
+			<th scope="col">Data da solicitação</th>
+			<th scope="col">
+				Ações
+				<button (click)="loadUsers()" class="btn btn-dark" tooltip="Atualizar lista">
+					<i class="fas fa-sync-alt"></i>
+				</button>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<ng-container *ngIf="users$ | async as users; else emptyList">
+			<tr *ngFor="let user of users">
+				<td>{{user.knownAs}}</td>
+				<td>{{user.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
+				<td>{{user.created | date: 'dd/MM/yyyy HH:mm'}}</td>
+				<td>
+					<button (click)="approveUser(user)" class="btn btn-success" tooltip="Aprovar {{user.knownAs}}">
+						<i class="fas fa-thumbs-up"></i>
+					</button>
+					<button (click)="deleteUser(user)" class="btn btn-danger" tooltip="Excluir solicitação">
+						<i class="fas fa-thumbs-down"></i>
+					</button>
+				</td>
+			</tr>
+			<ng-container *ngIf="users.length === 0" [ngTemplateOutlet]="emptyList"></ng-container>
+		</ng-container>
+	</tbody>
+</table>
+
+<ng-template #emptyList>
+	<tr>
+		<td class="text-center" colspan="4">
+			Nenhum usuário pendente.
+		</td>
+	</tr>
+</ng-template>

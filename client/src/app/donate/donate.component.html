@@ -1,0 +1,74 @@
+<div class="container-fluid mt-3 mb-4" *ngIf="books?.length > 0">
+	<div class="alert alert-info">
+		Após adicionar todos livros que deseja doar não se esqueça de clicar no botão <strong><i class="fas fa-book-medical"></i> DOAR</strong> na direita.
+	  </div>
+	  <button class="btn btn-light" (click)="donate()">
+		<i class="fas fa-book-medical"></i>
+		  Doar
+	</button>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xl-5">
+	<div class="col mb-4">
+		<form class="card bg-light" [formGroup]="bookForm" (ngSubmit)="addBook()" autocomplete="off">
+			<h4 class="card-header">
+				<div class="form-group has-danger">
+					<textarea type="text" placeholder="Título do livro" class="bg-secondary form-control"
+						[class.is-invalid]="bookForm.get('title').errors && bookForm.get('title').touched" name="title" formControlName="title"
+						tooltip="Campo obrigatório">
+					</textarea>
+				</div>
+			</h4>
+			<div class="container-img">
+				<input type="file" accept="image/*" (change)="readImg($event)">
+				<img [src]="bookForm.get('image').value" class="card-img-top" alt="book.title">
+				<i class="fas fa-image add-img"></i>
+			</div>
+			<div class="card-body">
+				<div class="form-group has-danger mb-4">
+					<input type="text" placeholder="Autor do livro" class="bg-secondary form-control"
+						[class.is-invalid]="bookForm.get('author').errors && bookForm.get('author').touched" name="author" formControlName="author"
+						tooltip="Campo obrigatório">
+				</div>
+				<div class="form-group has-danger">
+					<input type="number" placeholder="Ano de lançamento" class="bg-secondary form-control"
+						[class.is-invalid]="bookForm.get('year').errors && bookForm.get('year').touched" name="year" formControlName="year"
+						tooltip="Campo obrigatório">
+				</div>
+			</div>
+			<div class="card-footer">
+				<div class="btn-group d-flex" style="gap: 1rem;">
+					<button class="btn btn-sm btn-outline-primary" type="button" (click)="resetForm()">
+						<i class="fas fa-atlas"></i>
+						Limpar
+					</button>
+					<button class="btn btn-sm btn-primary" type="submit">
+						<i class="fas fa-book"></i>
+						Adicionar
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="col mb-4" *ngFor="let book of books">
+		<div class="card bg-light">
+			<h4 class="card-header">
+				{{book.title}}
+			</h4>
+			<img [src]="book.image" class="card-img-top" alt="{{book.title}}">
+			<div class="card-body">
+				<h6 class="card-title">{{book.author}}</h6>
+				<h6 class="card-title">{{book.year}}</h6>
+			</div>
+			<div class="card-footer">
+				<div class="btn-group d-flex">
+					<button class="btn btn-sm btn-danger" type="button" (click)="removeBook(book)">
+						<i class="fas fa-book-dead"></i>
+						Remover
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

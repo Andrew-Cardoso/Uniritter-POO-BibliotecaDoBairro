@@ -1,0 +1,9 @@
+<div id="container">
+	<main>
+		<div class="options">
+			<h5 class="btn">{{page}}</h5>
+		</div>
+		<app-login *ngIf="page === 'Login'" (signIn)="page = 'Registrar'"></app-login>
+		<app-register *ngIf="page === 'Registrar'" (signUp)="page = 'Login'"></app-register>
+	</main>
+</div>

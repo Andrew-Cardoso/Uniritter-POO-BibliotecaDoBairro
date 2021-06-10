@@ -1,0 +1,51 @@
+<div class="col mb-4">
+	<div class="card bg-light">
+		<h4 class="card-header">{{book.title}}</h4>
+		<img [src]="book.image || '../../../assets/images/blank book.jpg'" class="card-img-top" [alt]="book.title">
+		<div class="card-body">
+			<h6 class="card-title">{{book.author}}</h6>
+			<h6 class="card-title">{{book.year}}</h6>
+			<br>
+			<p class="card-text book-stock">
+				<span class="badge rounded-pill bg-primary">{{book.stock}}</span>
+				cópia{{book.stock === 1 ? '' : 's'}}.
+			</p>
+			<p class="card-text">
+				<app-status-badge [available]="book.available"></app-status-badge>
+			</p>
+
+		</div>
+		<div class="card-footer">
+			<div class="btn-group d-flex" style="gap: 1rem;">
+				<button class="btn btn-sm btn-dark" *ngIf="book.rents | rentedByUser: user.id; else rentBtn" (click)="returnBook(book.rents)">
+					<i class="fas fa-book"></i>
+					Devolver
+				</button>
+
+				<button class="btn btn-sm btn-info" *ngIf="book.rents?.length > 0" (click)="openRentsModal(book)">
+					<i class="fas fa-atlas"></i>
+					Ver aluguéis
+				</button>
+				<ng-template #rentBtn>
+					<button class="btn btn-sm btn-primary" [disabled]="!book.available" (click)="rentBook(book.id)">
+						<i class="fas fa-book-reader"></i>
+						Alugar
+					</button>
+				</ng-template>
+			</div>
+		</div>
+		<div class="card-footer" style="border-color: transparent;">
+			<div class="btn-group d-flex" style="gap: 1rem;">
+				<button class="btn btn-sm btn-outline-primary" (click)="donate(book)">
+					<i class="fas fa-book-medical"></i>
+					Doar
+				</button>
+				<button class="btn btn-sm btn-outline-danger" *hasRole="roles" (click)="deleteBook(book)">
+					<i class="fas fa-book-dead"></i>
+					Excluir
+				</button>
+			</div>
+		</div>
+
+	</div>
+</div>
